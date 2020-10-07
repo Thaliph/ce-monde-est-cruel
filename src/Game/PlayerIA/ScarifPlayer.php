@@ -61,9 +61,9 @@ class ScarifPlayer extends Player
                     $my_play = parent::rockChoice();
                 }
             } else {
-                $my_rock = $my_stats['rock'] / $round_number;
-                $my_paper = $my_stats['paper'] / $round_number;
-                $my_scissor = $my_stats['scissors'] / $round_number;
+                $my_rock = $my_stats['b']['rock'] / $round_number;
+                $my_paper = $my_stats['b']['paper'] / $round_number;
+                $my_scissor = $my_stats['b']['scissors'] / $round_number;
                 if ($my_rock > $my_paper && $my_rock > $my_scissor) {
                     $my_play = parent::scissorsChoice();
                 } elseif ($my_paper > $my_rock && $my_paper > $my_scissor){
