@@ -7,7 +7,7 @@ use Hackathon\Game\Result;
 /**
  * Class ScarifPlayers
  * @package Hackathon\PlayerIA
- * @author YOUR NAME HERE
+ * @author Alexis Merle
  */
 class ScarifPlayer extends Player
 {
@@ -41,8 +41,26 @@ class ScarifPlayer extends Player
         // How can i display the result of each round ? $this->prettyDisplay()
         // -------------------------------------    -----------------------------------------------------
 
+        $foe_stats = $this->result->getStatsFor($this->opponentSide);
+        $my_stats = $this->result->getStats();
+        $round_number = $this->result->getNbRound();
 
-        return parent::rockChoice();
+        if ($foe_stats['score'] === 0){
+            $my_play  = parent::rockChoice();
+        } else {
+            $rock = $foe_stats['rock'] / $round_number;
+            $paper = $foe_stats['paper'] / $round_number;
+            $scissor = $foe_stats['scissors'] / $round_number;
+            if ($rock > $paper && $rock > $scissor) {
+                $my_play = parent::paperChoice();
+            } elseif ($paper > $rock && $paper > $scissor){
+                $my_play = parent::scissorsChoice();
+            } else {
+                $my_play = parent::rockChoice();
+            }
+        }
+
+        return $my_play;
 
     }
 };
