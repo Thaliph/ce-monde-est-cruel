@@ -41,6 +41,7 @@ class ScarifPlayer extends Player
         // How can i display the result of each round ? $this->prettyDisplay()
         // -------------------------------------    -----------------------------------------------------
 
+        $alpha = 0.55;
         $foe_stats = $this->result->getStatsFor($this->opponentSide);
         $my_stats = $this->result->getStats();
         $round_number = $this->result->getNbRound();
@@ -51,12 +52,25 @@ class ScarifPlayer extends Player
             $rock = $foe_stats['rock'] / $round_number;
             $paper = $foe_stats['paper'] / $round_number;
             $scissor = $foe_stats['scissors'] / $round_number;
-            if ($rock > $paper && $rock > $scissor) {
-                $my_play = parent::paperChoice();
-            } elseif ($paper > $rock && $paper > $scissor){
-                $my_play = parent::scissorsChoice();
+            if ($scissor > $alpha || $paper > $alpha || $rock > $alpha){
+                if ($rock > $paper && $rock > $scissor) {
+                    $my_play = parent::paperChoice();
+                } elseif ($paper > $rock && $paper > $scissor){
+                    $my_play = parent::scissorsChoice();
+                } else {
+                    $my_play = parent::rockChoice();
+                }
             } else {
-                $my_play = parent::rockChoice();
+                $my_rock = $my_stats['rock'] / $round_number;
+                $my_paper = $my_stats['paper'] / $round_number;
+                $my_scissor = $my_stats['scissors'] / $round_number;
+                if ($my_rock > $my_paper && $my_rock > $my_scissor) {
+                    $my_play = parent::scissorsChoice();
+                } elseif ($my_paper > $my_rock && $my_paper > $my_scissor){
+                    $my_play = parent::paperChoice();
+                } else {
+                    $my_play = parent::rockChoice();
+                }
             }
         }
 
