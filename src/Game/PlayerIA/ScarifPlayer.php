@@ -47,7 +47,7 @@ class ScarifPlayer extends Player
         $round_number = $this->result->getNbRound();
 
         if ($foe_stats['score'] === 0){
-            $my_play  = parent::rockChoice();
+            $my_play  = parent::paperChoice();
         } else {
             $rock = $foe_stats['rock'] / $round_number;
             $paper = $foe_stats['paper'] / $round_number;
